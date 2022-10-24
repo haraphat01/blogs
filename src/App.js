@@ -1,11 +1,12 @@
-import logo from './logo.svg';
+
 import './App.css';
+import PostList from './features/posts/postList';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <hi>hi</hi>
+    <PostList/>
       </header>
     </div>
   );
