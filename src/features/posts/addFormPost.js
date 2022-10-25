@@ -1,10 +1,26 @@
+import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 import { useState } from "react";
-function AddostForm() {
+import { postAdded } from "./postsSlice";
+function AddFormPost() {
+    let dispatch = useDispatch()
+
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
 
     const onTitleChanged = e => setTitle(e.target.value);
     const onContentChanged = e => setContent(e.target.value)
+    let onSavePostClicked =()=>{
+        if(title && content){
+            dispatchEvent(postAdded({
+                id: nanoid(),
+                title,
+                content
+            }))
+            setTitle('')
+            setContent('')
+        }
+    }
     return (  
         <section>
             <h2>
@@ -18,12 +34,7 @@ function AddostForm() {
                     name="postTitle"
                     value={title}
                     onChange={onTitleChanged}
-                />
-                <label htmlFor="postAuthor">Author:</label>
-                <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
-                    <option value=""></option>
-                    {usersOptions}
-                </select>
+                /> 
                 <label htmlFor="postContent">Content:</label>
                 <textarea
                     id="postContent"
@@ -34,11 +45,11 @@ function AddostForm() {
                 <button
                     type="button"
                     onClick={onSavePostClicked}
-                    disabled={!canSave}
+                   
                 >Save Post</button>
             </form>
         </section>
     );
 }
 
-export default AddostForm;
+export default AddFormPost;
